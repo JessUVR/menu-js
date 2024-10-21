@@ -1,22 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Morning Cafe Menu</h1>
+        <div className="menu-item">
+          <h2>"The Original" Koja</h2>
+          <p>Korean BBQ short rib, sesame vinaigrette lettuce, katsu aioli, sesame seeds - $6.95</p>
+          <model-viewer 
+            src="/3dModels/astronaut.glb"
+            alt="3D model of The Original Koja"
+            ar
+            auto-rotate
+            camera-controls
+            shadow-intensity="1"
+            style={{ width: '100%', height: '300px' }}>
+          </model-viewer>
+        </div>
       </header>
     </div>
   );
