@@ -9,7 +9,7 @@ function App() {
           <h2>"The Original" Koja</h2>
           <p>Korean BBQ short rib, sesame vinaigrette lettuce, katsu aioli, sesame seeds - $6.95</p>
           <model-viewer 
-            src="https://modelviewer.dev/shared-assets/models/Astronaut.glb"
+            src="3DModels/astronaut.glb"
             alt="3D model of The Original Koj"
             ar
             auto-rotate
