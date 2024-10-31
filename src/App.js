@@ -30,13 +30,38 @@ function App() {
 
   const menuData = {
     Entrees: [
-      { title: '"The Original" Koja', description: 'Korean BBQ short rib, sesame vinaigrette lettuce, katsu aioli, sesame seeds - $6.95', model: '/3DModels/astronaut.glb' },
-      { title: '"Veggie Delight" Koja', description: 'Grilled vegetables, sesame vinaigrette lettuce, katsu aioli, sesame seeds - $5.95', model: '/3DModels/shiba.glb' },
-      { title: '"Spicy Chicken" Koja', description: 'Grilled chicken, spicy aioli, sesame vinaigrette lettuce, sesame seeds - $7.95', model: '/3DModels/door.glb' }
+      { 
+        title: '"The Original" Koja', 
+        description: 'Korean BBQ short rib, sesame vinaigrette lettuce, katsu aioli, sesame seeds - $6.95', 
+        model: '/3DModels/astronaut.glb',
+        poster: '/images/astronaut.jpg'  // Imagen de vista previa
+      },
+      { 
+        title: '"Veggie Delight" Koja', 
+        description: 'Grilled vegetables, sesame vinaigrette lettuce, katsu aioli, sesame seeds - $5.95', 
+        model: '/3DModels/shiba.glb',
+        poster: '/images/astronaut.jpg'  // Imagen de vista previa
+      },
+      { 
+        title: '"Spicy Chicken" Koja', 
+        description: 'Grilled chicken, spicy aioli, sesame vinaigrette lettuce, sesame seeds - $7.95', 
+        model: '/3DModels/door.glb',
+        poster: '/images/astronaut.jpg'  // Imagen de vista previa
+      }
     ],
     Appetizers: [
-      { title: '"Spring Rolls"', description: 'Crispy rolls with vegetables and dipping sauce - $4.95', model: '/3DModels/spring_rolls.glb' },
-      { title: '"Garlic Bread"', description: 'Toasted bread with garlic and herbs - $3.95', model: '/3DModels/garlic_bread.glb' }
+      { 
+        title: '"Spring Rolls"', 
+        description: 'Crispy rolls with vegetables and dipping sauce - $4.95', 
+        model: '/3DModels/shiba.glb',
+        poster: '/images/astronaut.jpg'  // Imagen de vista previa
+      },
+      { 
+        title: '"Garlic Bread"', 
+        description: 'Toasted bread with garlic and herbs - $3.95', 
+        model: '/3DModels/door.glb',
+        poster: '/images/astronaut.jpg'  // Imagen de vista previa
+      }
     ]
   };
 
@@ -62,14 +87,16 @@ function App() {
               <h2>{item.title}</h2>
               <p>{item.description}</p>
               <model-viewer 
-                src={item.model}
+                src={item.model}                // Ruta al modelo 3D específico
                 alt={`3D model of ${item.title}`}
+                poster={item.poster}             // Imagen de vista previa específica
+                reveal="interaction"             // Carga diferida hasta la interacción
                 ar
-                auto-rotate
+                ar-modes="scene-viewer webxr quick-look"
                 camera-controls
-                shadow-intensity="1"
-                style={{ width: '100%', height: '300px' }}>
-              </model-viewer>
+                auto-rotate
+                style={{ width: '100%', height: '300px' }}
+              />
             </div>
           ))}
         </Slider>
