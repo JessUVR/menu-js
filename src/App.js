@@ -1,23 +1,78 @@
 import './App.css';
+import Slider from "react-slick";
+import { useState } from "react";
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
 function App() {
+  const [category, setCategory] = useState("Entrees");
+  const [entreesIndex, setEntreesIndex] = useState(0);
+  const [appetizersIndex, setAppetizersIndex] = useState(0);
+
+  // Configuración de `react-slick` con el índice inicial basado en la categoría actual
+  const settings = {
+    dots: true,
+    arrows: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    initialSlide: category === "Entrees" ? entreesIndex : appetizersIndex, // Usa el índice correspondiente
+    beforeChange: (oldIndex, newIndex) => {
+      // Actualiza el índice correspondiente basado en la categoría actual
+      if (category === "Entrees") {
+        setEntreesIndex(newIndex);
+      } else {
+        setAppetizersIndex(newIndex);
+      }
+    }
+  };
+
+  const menuData = {
+    Entrees: [
+      { title: '"The Original" Koja', description: 'Korean BBQ short rib, sesame vinaigrette lettuce, katsu aioli, sesame seeds - $6.95', model: '/3DModels/astronaut.glb' },
+      { title: '"Veggie Delight" Koja', description: 'Grilled vegetables, sesame vinaigrette lettuce, katsu aioli, sesame seeds - $5.95', model: '/3DModels/shiba.glb' },
+      { title: '"Spicy Chicken" Koja', description: 'Grilled chicken, spicy aioli, sesame vinaigrette lettuce, sesame seeds - $7.95', model: '/3DModels/door.glb' }
+    ],
+    Appetizers: [
+      { title: '"Spring Rolls"', description: 'Crispy rolls with vegetables and dipping sauce - $4.95', model: '/3DModels/spring_rolls.glb' },
+      { title: '"Garlic Bread"', description: 'Toasted bread with garlic and herbs - $3.95', model: '/3DModels/garlic_bread.glb' }
+    ]
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>Morning Cafe Menu</h1>
-        <div className="menu-item">
-          <h2>"The Original" Koja</h2>
-          <p>Korean BBQ short rib, sesame vinaigrette lettuce, katsu aioli, sesame seeds - $6.95</p>
-          <model-viewer 
-            src="3DModels/astronaut.glb"
-            alt="3D model of The Original Koj"
-            ar
-            auto-rotate
-            camera-controls
-            shadow-intensity="1"
-            style={{ width: '100%', height: '300px' }}>
-          </model-viewer>
-        </div>
+        
+        {/* Navegación para las categorías */}
+        <nav>
+          <button className={category === "Entrees" ? "active" : ""} onClick={() => setCategory("Entrees")}>
+            Entrees
+          </button>
+          <button className={category === "Appetizers" ? "active" : ""} onClick={() => setCategory("Appetizers")}>
+            Appetizers
+          </button>
+        </nav>
+
+        {/* Slider con la clave para reiniciar la posición según el índice almacenado */}
+        <Slider key={category} {...settings}>
+          {menuData[category].map((item, index) => (
+            <div className="menu-item" key={index}>
+              <h2>{item.title}</h2>
+              <p>{item.description}</p>
+              <model-viewer 
+                src={item.model}
+                alt={`3D model of ${item.title}`}
+                ar
+                auto-rotate
+                camera-controls
+                shadow-intensity="1"
+                style={{ width: '100%', height: '300px' }}>
+              </model-viewer>
+            </div>
+          ))}
+        </Slider>
       </header>
     </div>
   );
